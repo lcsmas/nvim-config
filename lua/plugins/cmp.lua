@@ -1,6 +1,6 @@
 return {
   'hrsh7th/nvim-cmp',
-  event = 'InsertEnter',
+  -- event = 'InsertEnter',
   dependencies = {
     {
       'L3MON4D3/LuaSnip',
@@ -22,6 +22,7 @@ return {
     'saadparwaiz1/cmp_luasnip',
     'hrsh7th/cmp-nvim-lsp',
     'hrsh7th/cmp-path',
+    'hrsh7th/cmp-buffer',
     'kristijanhusak/vim-dadbod-completion',
   },
   config = function()
@@ -41,22 +42,13 @@ return {
         ['<C-n>'] = cmp.mapping.select_next_item(),
         ['<C-p>'] = cmp.mapping.select_prev_item(),
 
-        -- Scroll the documentation window [b]ack / [f]orward
         ['<C-b>'] = cmp.mapping.scroll_docs(-4),
         ['<C-f>'] = cmp.mapping.scroll_docs(4),
 
+        ['<C-e>'] = cmp.mapping.abort(),
         ['<C-y>'] = cmp.mapping.confirm { select = true },
-
-        -- If you prefer more traitional completion keymaps,
-        -- you can uncomment the following lines
-        --['<CR>'] = cmp.mapping.confirm { select = true },
-        --['<Tab>'] = cmp.mapping.select_next_item(),
-        --['<S-Tab>'] = cmp.mapping.select_prev_item(),
-
         ['<C-Space>'] = cmp.mapping.complete {},
 
-        -- <c-l> will move you to the right of each of the expansion locations.
-        -- <c-h> is similar, except moving you backwars.
         ['<C-l>'] = cmp.mapping(function()
           if luasnip.expand_or_locally_jumpable() then
             luasnip.expand_or_jump()
@@ -75,13 +67,41 @@ return {
         { name = 'nvim_lsp' },
         { name = 'luasnip' },
         { name = 'path' },
+        { name = 'buffer' },
+      },
+
+      window = { completion = cmp.config.window.bordered(), documentation = cmp.config.window.bordered() },
+
+      formatting = {
+        format = function(entry, vim_item)
+          vim_item.menu = ({
+            nvim_lsp = '[LSP]',
+            buffer = '[Buffer]',
+            path = '[Path]',
+          })[entry.source.name]
+          return vim_item
+        end,
       },
     }
     cmp.setup.filetype({ 'sql', 'mysql', 'plsql' }, {
       sources = cmp.config.sources {
         { name = 'vim-dadbod-completion' },
+      },
+    })
+
+    cmp.setup.cmdline({ '/', '?' }, {
+      mapping = cmp.mapping.preset.cmdline(),
+      sources = {
         { name = 'buffer' },
       },
+    })
+    cmp.setup.cmdline(':', {
+      mapping = cmp.mapping.preset.cmdline(),
+      sources = cmp.config.sources({
+        { name = 'path' },
+      }, {
+        { name = 'cmdline' },
+      }),
     })
   end,
 }
