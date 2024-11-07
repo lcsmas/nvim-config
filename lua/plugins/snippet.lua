@@ -46,5 +46,33 @@ return {
         t { '', '});' },
       }),
     })
+
+    ls.add_snippets('all', {
+      s('transaction', {
+        t 'beforeEach(transaction)',
+        t { '', 'afterEach(rollback)' },
+      }),
+    })
+
+    ls.add_snippets('all', {
+      s('describe', {
+        t { "describe('" },
+        i(1, ''),
+        t "', () => {",
+        i(2),
+        t '});',
+      }),
+    })
+    ls.add_snippets('all', {
+      s('it', {
+        t { "it('" },
+        i(1, ''),
+        t "', ",
+        i(2, ''),
+        t '() => {',
+        i(3),
+        t '});',
+      }),
+    })
   end,
 }
