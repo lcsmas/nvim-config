@@ -41,6 +41,36 @@ return {
           end,
         },
       },
+      -- output = {
+      --   enabled = true,
+      --   open_on_run = true,
+      --   -- Create a custom output handler
+      --   handler = function(lines, _)
+      --     -- Create a new terminal buffer
+      --     local bufnr = vim.api.nvim_create_buf(false, true)
+      --     local term_id = vim.api.nvim_open_term(bufnr, {
+      --       on_input = function() end, -- Disable terminal input
+      --     })
+      --
+      --     -- Send the test output to the terminal
+      --     for _, line in ipairs(lines) do
+      --       vim.api.nvim_chan_send(term_id, line .. '\r\n')
+      --     end
+      --
+      --     -- Open the buffer in a floating window
+      --     vim.api.nvim_open_win(bufnr, true, {
+      --       relative = 'editor',
+      --       row = 3,
+      --       col = 3,
+      --       width = math.min(#lines[1] or 40, 120),
+      --       height = math.min(#lines, 20),
+      --       style = 'minimal',
+      --       border = 'rounded',
+      --     })
+      --
+      --     return bufnr
+      --   end,
+      -- },
     }
 
     local run = require('neotest').run
