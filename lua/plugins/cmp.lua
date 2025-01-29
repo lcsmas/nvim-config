@@ -80,7 +80,11 @@ return {
             nvim_lsp = '[LSP]',
             buffer = '[Buffer]',
             path = '[Path]',
+            dadbod = '[DB]',
+            luasnip = '[LuaSnip]',
+            copilot = '[Copilot]',
           })[entry.source.name]
+
           return vim_item
         end,
       },
@@ -88,6 +92,7 @@ return {
     cmp.setup.filetype({ 'sql', 'mysql', 'plsql' }, {
       sources = cmp.config.sources {
         { name = 'vim-dadbod-completion' },
+        { source = 'buffer ' },
       },
     })
 

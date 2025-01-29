@@ -1,6 +1,12 @@
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
+-- Tab settings
+vim.opt.autoindent = true
+vim.opt.smartindent = true
+vim.opt.shiftwidth = 2
+vim.opt.tabstop = 2
+
 vim.g.have_nerd_font = true
 
 vim.opt.number = true
