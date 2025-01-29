@@ -2,10 +2,10 @@ return {
   {
     'zbirenbaum/copilot.lua',
     cmd = 'Copilot',
-    event = 'InsertEnter',
+    lazy = false,
     config = function()
       require('copilot').setup {
-        suggestion = { enabled = false },
+        suggestion = { auto_trigger = true },
         panel = { enabled = false },
       }
     end,
