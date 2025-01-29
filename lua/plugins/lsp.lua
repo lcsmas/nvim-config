@@ -27,7 +27,6 @@ return {
         vim.keymap.set({ 'n', 'v' }, '<leader>ca', vim.lsp.buf.code_action, { buffer = event.buf, desc = '[C]ode [A]ction' })
         map('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
         map('K', vim.lsp.buf.hover, 'Hover Documentation')
-        vim.keymap.set({ 'n', 'v', 'i' }, '<C-k>', vim.lsp.buf.signature_help)
 
         local handlers = vim.lsp.handlers
 
@@ -86,6 +85,13 @@ return {
       -- pyright = {},
       -- rust_analyzer = {},
       tsserver = {},
+      kotlin_language_server = {
+        -- setup = {
+        --   cmd = { 'kotlin-language-server' },
+        --   filetypes = { 'kotlin' },
+        --   root_dir = require('lspconfig.util').root_pattern('settings.gradle', 'settings.gradle.kts', 'build.gradle', 'build.gradle.kts', '.git'),
+        -- },
+      },
 
       lua_ls = {
         settings = {
