@@ -80,7 +80,7 @@ return {
             nvim_lsp = '[LSP]',
             buffer = '[Buffer]',
             path = '[Path]',
-            dadbod = '[DB]',
+            ['vim-dadbod-completion'] = '[DB]',
             luasnip = '[LuaSnip]',
             copilot = '[Copilot]',
           })[entry.source.name]
@@ -89,10 +89,32 @@ return {
         end,
       },
     }
+    -- cmp.setup.filetype({ 'sql', 'mysql', 'plsql' }, {
+    --   sources = cmp.config.sources {
+    --     { name = 'vim-dadbod-completion' },
+    --     { source = 'buffer' },
+    --   },
+    --   mapping = cmp.mapping.preset.insert {
+    --     ['<C-Space>'] = cmp.mapping.complete(),
+    --   },
+    -- })
     cmp.setup.filetype({ 'sql', 'mysql', 'plsql' }, {
+      mapping = cmp.mapping.preset.insert {
+        ['<C-Space>'] = cmp.mapping(function()
+          -- Schedule the sequence of events
+          vim.schedule(function()
+            -- Insert the dot and immediately delete it
+            vim.api.nvim_feedkeys('.', 'n', false)
+            vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<BS>', true, true, true), 'n', false)
+            -- Then trigger completion
+            cmp.complete()
+          end)
+          return true
+        end),
+      },
       sources = cmp.config.sources {
         { name = 'vim-dadbod-completion' },
-        { source = 'buffer ' },
+        { name = 'buffer' },
       },
     })
 
