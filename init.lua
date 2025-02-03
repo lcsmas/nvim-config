@@ -1,3 +1,5 @@
+require 'custom.commands'
+
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
