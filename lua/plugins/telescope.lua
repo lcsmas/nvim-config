@@ -25,6 +25,7 @@ return {
         layout_config = {
           height = 0.9,
         },
+        wrap_results = true,
       },
       extensions = {
         ['ui-select'] = {
