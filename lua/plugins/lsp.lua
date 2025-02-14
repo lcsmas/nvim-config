@@ -82,7 +82,7 @@ return {
     local servers = {
       -- clangd = {},
       -- gopls = {},
-      -- pyright = {},
+      pyright = {},
       -- rust_analyzer = {},
       tsserver = {},
       kotlin_language_server = {
