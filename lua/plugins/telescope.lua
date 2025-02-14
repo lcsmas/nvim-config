@@ -55,7 +55,7 @@ return {
 
     vim.keymap.set('n', '<leader>/', builtin.current_buffer_fuzzy_find, { desc = '[/] Fuzzily search in current buffer' })
 
-    vim.keymap.set('n', '<leader>sm', builtin.git_commits, { desc = '[S]earch Co[m]mits' })
+    vim.keymap.set('n', '<leader>st', builtin.git_commits, { desc = '[S]earch Commi[t]s' })
     vim.keymap.set('n', '<leader>s/', function()
       builtin.live_grep {
         grep_open_files = true,
@@ -70,5 +70,7 @@ return {
     vim.keymap.set('n', '<leader>sn', function()
       builtin.find_files { cwd = vim.fn.stdpath 'config' }
     end, { desc = '[S]earch [N]eovim files' })
+
+    vim.keymap.set('n', '<leader>sm', builtin.man_pages, { desc = '[S]earch [M]an Pages' })
   end,
 }
