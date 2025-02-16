@@ -72,5 +72,13 @@ return {
     end, { desc = '[S]earch [N]eovim files' })
 
     vim.keymap.set('n', '<leader>sm', builtin.man_pages, { desc = '[S]earch [M]an Pages' })
+
+    -- Search Python doc files
+    vim.keymap.set('n', '<leader>sP', function()
+      builtin.find_files {
+        prompt_title = 'Python Documentation Files',
+        cwd = '/home/lucas/.local/share/nvim/python-doc',
+      }
+    end, { desc = '[S]earch [P]ython doc files' })
   end,
 }
