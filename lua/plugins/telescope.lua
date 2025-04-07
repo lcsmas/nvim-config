@@ -22,10 +22,13 @@ return {
   config = function()
     require('telescope').setup {
       defaults = require('telescope.themes').get_ivy {
-        layout_config = {
-          height = 0.9,
+        layout_config = { height = 0.9 },
+        path_display = { 'truncate' },
+      },
+      pickers = {
+        jumplist = {
+          path_display = { 'tail' },
         },
-        wrap_results = true,
       },
       extensions = {
         ['ui-select'] = {
@@ -42,7 +45,7 @@ return {
     vim.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = '[S]earch [H]elp' })
     vim.keymap.set('n', '<leader>sk', builtin.keymaps, { desc = '[S]earch [K]eymaps' })
     vim.keymap.set('n', '<leader>sf', function()
-      builtin.find_files { find_command = { 'fdfind', '--type', 'f', '--type', 'd' } }
+      builtin.find_files { find_command = { 'fdfind', '--type', 'f', '--type', 'd', '--no-ignore' } }
     end, { desc = '[S]earch [F]iles' })
     vim.keymap.set('n', '<leader>ss', builtin.builtin, { desc = '[S]earch [S]elect Telescope' })
     vim.keymap.set('n', '<leader>sw', builtin.grep_string, { desc = '[S]earch current [W]ord' })
@@ -52,6 +55,8 @@ return {
     vim.keymap.set('n', '<leader>s.', builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
     vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = '[ ] Find existing buffers' })
     vim.keymap.set('n', '<leader>sc', builtin.commands, { desc = '[S]earch [C]ommands' })
+    vim.keymap.set('n', '<leader>sj', builtin.jumplist, { desc = '[S]earch [J]umplist' })
+    vim.keymap.set('n', '<leader>gs', builtin.git_status, { desc = '[G]it [S]tatus' })
 
     vim.keymap.set('n', '<leader>/', builtin.current_buffer_fuzzy_find, { desc = '[/] Fuzzily search in current buffer' })
 

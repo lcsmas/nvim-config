@@ -9,6 +9,17 @@ vim.opt.smartindent = true
 vim.opt.shiftwidth = 2
 vim.opt.tabstop = 2
 
+-- Tab settings for kotlin files
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = 'kotlin',
+  callback = function()
+    vim.bo.expandtab = true
+    vim.bo.shiftwidth = 4
+    vim.bo.tabstop = 4
+    vim.bo.softtabstop = 4
+  end,
+})
+
 vim.g.have_nerd_font = true
 
 vim.opt.number = true
@@ -106,7 +117,6 @@ vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right win
 vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
 vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 
-vim.keymap.set('n', '<leader>n', '<cmd>vnew<CR>', { desc = 'New vertical' })
 vim.keymap.set({ 'n', 'v' }, '<C-d>', '<C-d>zz', { noremap = true })
 vim.keymap.set({ 'n', 'v' }, '<C-u>', '<C-u>zz', { noremap = true })
 

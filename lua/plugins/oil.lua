@@ -11,6 +11,9 @@ return {
         ['<C-d>'] = 'actions.preview_scroll_down',
         ['<C-u>'] = 'actions.preview_scroll_up',
       },
+      view_options = {
+        show_hidden = true,
+      },
     }
   end,
 }

@@ -80,17 +80,35 @@ return {
     capabilities = vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp').default_capabilities())
 
     local servers = {
-      -- clangd = {},
-      -- gopls = {},
       pyright = {},
       -- rust_analyzer = {},
-      tsserver = {},
+      ts_ls = {},
+      prettierd = {},
+      ktlint = {},
+      ktfmt = {},
+      -- eslint = {},
       kotlin_language_server = {
-        -- setup = {
-        --   cmd = { 'kotlin-language-server' },
-        --   filetypes = { 'kotlin' },
-        --   root_dir = require('lspconfig.util').root_pattern('settings.gradle', 'settings.gradle.kts', 'build.gradle', 'build.gradle.kts', '.git'),
-        -- },
+        settings = {
+          kotlin = {
+            compiler = {
+              jvm = {
+                target = '17',
+              },
+            },
+            java = {
+              javaOpts = '-Xmx2G',
+            },
+            plugin = {
+              spring = {
+                enable = true,
+              },
+            },
+          },
+        },
+        on_attach = function(client, bufnr)
+          client.server_capabilities.documentFormattingProvider = false
+          client.server_capabilities.documentRangeFormattingProvider = false
+        end,
       },
 
       lua_ls = {
