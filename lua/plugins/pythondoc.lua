@@ -1,3 +1,0 @@
-return {
-  'girishji/pythondoc.vim',
-}
