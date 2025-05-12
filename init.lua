@@ -34,7 +34,35 @@ vim.opt.showmode = false
 -- Sync clipboard between OS and Neovim.
 --  Remove this option if you want your OS clipboard to remain independent.
 --  See `:help 'clipboard'`
-vim.opt.clipboard = 'unnamedplus'
+if vim.fn.has 'wsl' == 1 then
+  vim.g.clipboard = {
+    name = 'win32yank-wsl',
+    copy = {
+      ['+'] = 'win32yank.exe -i --crlf',
+      ['*'] = 'win32yank.exe -i --crlf',
+    },
+    paste = {
+      ['+'] = 'win32yank.exe -o --lf',
+      ['*'] = 'win32yank.exe -o --lf',
+    },
+    cache_enabled = 0,
+  }
+elseif os.getenv 'WAYLAND_DISPLAY' then
+  vim.g.clipboard = {
+    name = 'wayland-clipboard',
+    copy = {
+      ['+'] = 'wl-copy --type text/plain',
+      ['*'] = 'wl-copy --primary --type text/plain',
+    },
+    paste = {
+      ['+'] = 'wl-paste --no-newline',
+      ['*'] = 'wl-paste --primary --no-newline',
+    },
+    cache_enabled = 1,
+  }
+else
+  vim.opt.clipboard = 'unnamedplus'
+end
 
 -- Enable termguicolors
 if vim.fn.has 'termguicolors' == 1 then
@@ -97,7 +125,7 @@ vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
 vim.opt.inccommand = 'split'
 
 -- Show which line your cursor is on
-vim.opt.cursorline = true
+vim.opt.cursorline = false
 
 -- Minimal number of screen lines to keep above and below the cursor.
 vim.opt.scrolloff = 10

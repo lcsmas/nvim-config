@@ -3,16 +3,17 @@ return {
     'zbirenbaum/copilot.lua',
     cmd = 'Copilot',
     lazy = false,
+    enabled = false,
     config = function()
       require('copilot').setup {
         suggestion = {
           auto_trigger = true,
           keymap = {
-            accept = '<D-l>',
+            accept = '<M-o>',
             accept_word = false,
             accept_line = false,
-            next = '<D-]>',
-            prev = '<D-[>',
+            next = '<M-]>',
+            prev = '<M-[>',
             dismiss = '<C-]>',
           },
         },
